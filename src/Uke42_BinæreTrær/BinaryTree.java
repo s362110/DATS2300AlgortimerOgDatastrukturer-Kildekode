@@ -2,6 +2,8 @@ package Uke42_BinæreTrær;
 
 import java.util.ArrayDeque;
 
+// Bredde først-traversering
+// Dybde først-traversering
 public class BinaryTree {
 
     static class BinaryTreeNode {
