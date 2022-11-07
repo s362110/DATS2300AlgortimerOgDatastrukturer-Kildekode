@@ -7,38 +7,56 @@ import java.util.ArrayDeque;
 public class BinaryTree {
 
     static class BinaryTreeNode {
+        // For denne binærtre noden så har vi en verdi.
         char value;
+
+        // I tillegg så har vi en peker til hver av våre barn. Det er de verdiene vi hadde.
         BinaryTreeNode left_child;
         BinaryTreeNode right_child;
 
+        // Lager en konstruktør
         BinaryTreeNode(char value) {
             this.value = value;
+            // Vi trenger ikke å gjøre dette men da vet vi at vi har initialisert dette.
+            // I C++ og andre språk så er denne delen veldig viktig å ha med, mens i Java så er ikke det så viktig.
             this.left_child = null;
             this.right_child = null;
         }
 
+        // Legger inn en node
         BinaryTreeNode addLeftChild(char value) {
+            // Legger til en liten hjelpefunksjon som legger til et venstre barn
             this.left_child = new BinaryTreeNode(value);
+            // Returnerer rot-noden som vi lager under. Da får vi sørget for at vi får lagret den i main funksjonen litt lenger nede.
             return this.left_child;
         }
 
+        // Gjør tilsvarenede for høyre barn
         BinaryTreeNode addRightChild(char value) {
             this.right_child = new BinaryTreeNode(value);
             return this.right_child;
         }
+
+        // Nå har vi laget en binærtre klasse som er alt vi trenger for å representere treet.
     }
 
+    // Istedet for å rote til main metoden så lager jeg en egen funksjon.
+    // Tar inn BinaryTreeNode root
     static void printLevelOrder(BinaryTreeNode root){
+        // Deque er en veldig grei måte å håndtere en stack eller kø på fordi den er veldig godt implementert, og er en veldig god datastruktur for den type data.
+        // ArrayDeque har implementert alle disse funksjonene som er komplisert for oss å legge inn manuelt.
         ArrayDeque<BinaryTreeNode> queve = new ArrayDeque<BinaryTreeNode>();
 
-        // Legg til rot-noden
+        // Legger til det første elementet som er rot-noden
+        // Vi kan ta addFirst eller addLast.
         queve.addLast(root);
 
         while (!queve.isEmpty()){
-            // Ta ut første fra køen
+            // 1. Ta ut første fra køen
             BinaryTreeNode current = queve.removeFirst();
 
-            // Legg til current sine to barn til køen
+            // 2. Legg til current sine to barn til køen
+            // Når vi kommer til bunnen av treet så er barna null
             if (current.left_child != null){
                 queve.addLast(current.left_child);
             }
@@ -52,11 +70,15 @@ public class BinaryTree {
         }
     }
 
+    // Lager en main funksjon for å skrive ut
+
     public static void main(String[] args){
-        // Lager rot-noden
+        // Lager rot-noden (nivå 0)
         BinaryTreeNode root = new BinaryTreeNode('A');
 
+        // Man bør egentlig lage en mer systematisk kode, men akkurat nå så hardkoder jeg dette inn.
         // Legg inn resterende noder på nivå 1
+        // Lagret noden etter å ha returnert over i funksjonen addLeftChild, og addRightChild.
         BinaryTreeNode b = root.addLeftChild('B');
         BinaryTreeNode c = root.addRightChild('C');
 
