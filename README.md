@@ -98,3 +98,15 @@ Måten å fjerne en node fra et binært søketre er avhengig av om noden vi skal
 
 ### Heap datatstruktur
 Et minimumstre har alle foreldrenoder mindre eller lik verdi som sine barnenoder. En minimumsheap er i tillegg ett komplett tre. Dette gjør at vi enkelt kan lagre det som et array ved å bruke node-id som index i arrayet. 
+
+### LZW-koding
+Huffman-trær ble brukt til å lage optimale prefix-koder for komprimering av symboler.Symboler betyr her bokstaver (f.eks ABCDR for å kode ABRACADABRA), eller binære tegn (som typisk vises som � og andre rare symboler) om du åpner en binærfil i en teksteditor. Hvert av disse symbolene består av 8 bit (som er lengden til en char), og det Huffman-koding gjør er å erstatte disse 8 bit lange tegnene med bit-koder som er kortere (kanskje bare to til fire bit bit) for symboler som forekommer ofte. For symboler som forekommer sjeldent kan vi ha mye lengere bit-koder, men det gjør ikke så mye fordi de forekommer sjeldent. Det geniale med Huffmans metode er måten han lager disse prefix-kodene/bit-kodene. 
+
+LZW-komprimering bruker en annen fremgangsmåte. Istedenfor å erstatte hvert symbol med en kortere kode, så forsøker LZW å kode flere symboler etter hverandre (ett "ord") med en enkelt kode. Hver gang LZW ser en ukjent symbolkombinasjon, så lager algoritmen en ny kode for denne kombinasjonen. Det geniale med LZW-koding er at man ikke trenger å sende med ordboken med koder for å dekode. Alt man trenger for å dekode er kodene for enkelt-symbolene. 
+
+## Uke 45 - Selvbalanserende trær og grafer
+Målet med selvbalanserende trær er å sørge for at vi unngår å få veldig dype trær. Vi skal se på to typer slike trær: 2-3-4-trær og rød-sorte trær. 2-3-4-trærne har mulighet til å ha inntil 3 verdier per node, og inntil 4 barn. Når vi legger inn så splittes noder med flere enn 3 verdier, og det er denne splittingen som gjør at treet er selv-balanserende. For rød-sorte trær (som er ekvivalente med 2-3-4-trær - dvs. vi kan gå fra rød-sorte til 2-3-4-trær og tilbake), så fargelegger vi våre noder i et vanlig binærtre. Så har vi et par regler som gjør at treet blir selv-balanserende. 
+
+### Dijkstra
+Dijkstras er et bredde-først søk som konstant finner korteste vei til alle noder. Når man så gått fra node A og kommet frem til node B (besøkt fra alle dens naboer) vet vi at vi har funnet korteste vei fra A til B. Dette høres ut som et abstrakt problem uten praktisk betydning, men det er helt feil: internett, planlegging av kjøre-ruter for leveranser, og alle liknende problemer kan løses ved å bruke Dijkstras algoritme. 
+
